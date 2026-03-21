@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<title>KSEBL-View LT Bill</title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	</head>
+	<body> 
+	
+ <style>
+  body {
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+  }
+  .card {
+    /* display: inline-block; */
+    position: relative;
+    width: 100%;
+    margin: 100px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+    color: rgba(0,0,0, 0.87);
+    background: #fff;
+    padding: 0 ;
+  }
+  input,select{
+    margin-bottom: 10px;
+    padding: 4px 6px;
+  }
+  .calc-frame{
+    margin:auto;
+    background-color: #fff;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .card-4{
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+  }
+  .teel-head{
+    color: #fff!important;
+    background-color: #0395d9!important;
+    font-size: 20px;
+    padding: 8px
+  }
+
+  .msg-head{
+    color: #b32d00!important;
+    /*background-color: #e6e6e6!important;*/
+    font-size: 20px;
+    padding: 8px
+  }
+
+
+  .btn-teel{
+    color: #0395d9;
+    background-color: #fff;
+    border-color: #0395d9;
+  }
+  .btn-teel.active, .btn-teel.focus, .btn-teel:active, .btn-teel:focus, .btn-teel:hover, .open>.dropdown-toggle.btn-teel {
+    color: #fff;
+    background-color: #0395d9;
+    border-color: #0395d9;
+  }
+  .blue-head{
+    color: #fff!important;
+    background-color: #0395d9!important;
+    padding: 15px
+  }
+  .blue-tail{
+    color: #fff!important;
+    background-color: #0395d9!important;
+    padding: 15px
+  }
+  .form-check-label {
+    margin-bottom: 8px!important;
+  }
+  .more{
+    display: none;
+  }
+  .zo2-logo{
+    width:15%;134px;
+  }
+  .control-label{
+    font-weight: 600;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    opacity: 1;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 170px;
+    background-color: #EEF5FB;
+    color: #0000FF;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 85%;
+    margin-left: -60px;
+    transition: opacity 0.3s;
+    border-color: #9797FF;
+    border-style: solid;
+
+  }
+
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 70%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #d1ecf1 transparent transparent transparent;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .calcs tr { line-height: 5px; }
+  .calcs td { font-size: 10px; }
+  .calcs th { font-size: 10px; }
+
+  .right {
+    text-align: right;
+    margin-right: 1em;
+  }
+
+#display_msg{
+ display: none;
+ position: absolute;
+}
+
+</style>	
+<script>
+	$(document).ready(function(){
+	$('#consumerno').focus();
+	});
+	$(document).on('focus','#consumerno',function(){
+		$(this).select();
+	});
+</script>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+<header id="standard-logo" class="zo2-logo"> <a class="standard-logo-link" href="http://kseb.in/" title="കേരളത്തിന്റെ ഊര്‍ജ്ജം"> <img alt="[കേരളത്തിന്റെ ഊര്‍ജ്ജം]	" src="eb.png"> </a> </header>
+</nav>
+  <div class="container-fluid" id="form_content" style='width:60%'>
+		<form name='form1' method='post' action='index.php' onsubmit="return ValidateNo();">
+			<div class="card mt-2">
+				<div class="teel-head" style='background-color:blue'>View Your Latest Electricity Bill</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-sm-4"><b>Consumer Number</b></div>
+						<div class="col-sm-6 col-md-4">
+							<input type="text" name="consumerno" id="consumerno_id" maxlength="13" autocomplete="off" class="form-control num-13" value=''>
+						</div>
+					</div>
+                					
+					<div class="row mt-2">
+						<div class="col-sm-4"><b>Registered Mobile Number</b></div>
+						<div class="col-sm-6 col-md-4">
+							<input type="text" name="regmobno" id="regmobno_id" maxlength="10" autocomplete="off" class="form-control num-5" value=''>
+						</div>
+					</div>
+					
+					<div class="row mt-2">
+						<div class="col-sm-4 col-md-4">
+							<input type="hidden" name="okey" value='203b4d3abbf843dc38035fad421c1d95'>						
+							<button type='submit' name='b_submit_0' id="b_submit_0" class='btn btn-primary' value='View Bill' >View Bill</button>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</form>
+		<ul>
+			<li>Bills shown here are subject to revision. Revised bills can be obtained from your Electrical Section Office. </li>
+			<li>In case of dispute, the original bill served from the Electrical Section office shall prevail.</li>
+			<li>The conditions/notifications given in the original bill is applicable to this bill also.</li>
+		</ul>
+		</div>
+		<script>
+function ValidateNo() {
+  var phoneNo = document.getElementById('regmobno_id');
+  var consumerno = document.getElementById('consumerno_id');
+  var formsubmit=true;
+
+  if (consumerno.value == "" || consumerno.value == null) {
+    alert("Please enter your Consumer No.");
+     document.form1.consumerno.focus();
+    return false;
+  }  
+  if (consumerno.value.length < 13 || consumerno.value.length > 13) {
+    alert("Please Enter 13 Digit Consumer No.");
+     document.form1.consumerno.focus();
+    return false;
+  }
+  if (phoneNo.value == "" || phoneNo.value == null) {
+    alert("Please enter your Mobile No.");
+    document.form1.regmobno.focus();
+    return false;
+  } 
+  if (phoneNo.value.length < 10 || phoneNo.value.length > 10) {
+    alert("Mobile No. is not valid, Please Enter 10 Digit Mobile No.");
+     document.form1.regmobno.focus();
+    return false;
+  }    
+  return true;
+ }
+ 
+(function($) {
+    $.fn.inputFilter = function(inputFilter) {
+      return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+        if (inputFilter(this.value)) {
+          this.oldValue = this.value;
+          this.oldSelectionStart = this.selectionStart;
+          this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+          this.value = this.oldValue;
+          this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        } else {
+          this.value = "";
+        }
+      });
+    };
+  }(jQuery));
+
+
+  $(document).ready( function () {
+
+    $(".num-5").inputFilter(function(value) {
+      return /^[1-9]?\d{0,9}$/.test(value);
+    });
+
+    $(".num-13").inputFilter(function(value) {
+      return /^[1-9]?\d{0,12}$/.test(value);
+    }); 
+   });
+ </script>
+	</body>
+</html>
